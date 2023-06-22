@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:if="${mensagem}" th:text="${mensagem}">
+    </div>
+    <form action="/book/form/save" method="POST">
+        <div th:if="${book}">
+            <input type="text" readonly id="id" name="id" th:value="${book.id}">
+        </div>
+        Nome: <input type="text" class="form-control" id="name" name="name" th:value="${book?.name}" />
+
+        Author: <select name="author">
+            <option th:each="author : ${authorList}"
+                    th:value="${author.id}"
+                    th:text="${author.name}"
+                    th:selected="${author.id} == ${book?.author?.id}"
+            />
+        </select>
+        <button type="submit">Salvar Livro</button>
+    </form>
+</body>
+</html>
